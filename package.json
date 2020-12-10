@@ -4,6 +4,7 @@
 	"description": "Quick jump to components",
 	"version": "1.0.0",
 	"publisher": "naoray",
+	"repository": "https://github.com/naoray/laravel-goto-components.git",
 	"engines": {
 		"vscode": "^1.51.0"
 	},
