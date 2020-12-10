@@ -3,7 +3,7 @@
 	"displayName": "laravel-goto-components",
 	"description": "Quick jump to components",
 	"icon": "icon.png",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"publisher": "naoray",
 	"repository": "https://github.com/naoray/laravel-goto-components.git",
 	"engines": {
