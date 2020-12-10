@@ -3,7 +3,7 @@
 	"displayName": "laravel-goto-components",
 	"description": "Quick jump to components",
 	"icon": "icon.png",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"publisher": "naoray",
 	"repository": "https://github.com/naoray/laravel-goto-components.git",
 	"engines": {
@@ -27,7 +27,7 @@
             "properties": {
                 "laravel_goto_components.regex": {
                     "type": "string",
-                    "default": "(?<=<x-)(?!slot)[a-z-]+",
+                    "default": "(?<=<x-)(?!slot)[a-z.-]+",
                     "description": "Custom regex for matching strings"
 				}
 			}

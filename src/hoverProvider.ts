@@ -9,6 +9,7 @@ import {
   workspace,
   ProviderResult,
 } from "vscode";
+import { nameToPath } from "./utils";
 
 export default class HoverProvider implements BaseHoverProvider {
   public provideHover(
@@ -24,7 +25,7 @@ export default class HoverProvider implements BaseHoverProvider {
     }
 
     const componentName = doc.getText(range);
-    const componentPath = `/resources/views/components/${componentName}.blade.php`;
+    const componentPath = nameToPath(componentName);
     const workspacePath = workspace.getWorkspaceFolder(doc.uri)?.uri.fsPath;
 
     if (!existsSync(workspacePath + componentPath)) {

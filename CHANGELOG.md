@@ -1,9 +1,12 @@
 # Change Log
 
-All notable changes to the "laravel-goto-components" extension will be documented in this file.
+## [v1.1.0](https://github.com/naoray/laravel-factory-prefill/tree/v1.0.0) (2020-12-10)
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+**Added**
+- quick navigation for nested components like `x-input.button`
 
-## [Unreleased]
+## [v1.0.0](https://github.com/naoray/laravel-factory-prefill/tree/v1.0.0) (2020-12-09)
 
-- Initial release
+**Added**
+- `CTRL` + `click` to navigate `x-components` in the `components` directory
+- display existing components in `blade.php` files as links

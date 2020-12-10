@@ -11,6 +11,7 @@ import {
   DocumentLink,
   Range,
 } from "vscode";
+import { nameToPath } from "./utils";
 
 export default class LinkProvider implements DocumentLinkProvider {
   public provideDocumentLinks(
@@ -30,12 +31,15 @@ export default class LinkProvider implements DocumentLinkProvider {
       let result = line.text.match(reg);
 
       if (result !== null) {
-        for (let item of result) {
-          const componentPath = `/resources/views/components/${item}.blade.php`;
+        for (let componentName of result) {
+          const componentPath = nameToPath(componentName);
 
           if (existsSync(workspacePath + componentPath)) {
-            let start = new Position(line.lineNumber, line.text.indexOf(item));
-            let end = start.translate(0, item.length);
+            let start = new Position(
+              line.lineNumber,
+              line.text.indexOf(componentName)
+            );
+            let end = start.translate(0, componentName.length);
             let documentlink = new DocumentLink(
               new Range(start, end),
               Uri.file(workspacePath + componentPath)
