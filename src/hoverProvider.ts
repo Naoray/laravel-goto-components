@@ -9,7 +9,7 @@ import {
   workspace,
   ProviderResult,
 } from "vscode";
-import { nameToPath } from "./utils";
+import { nameToIndexPath, nameToPath } from "./utils";
 
 export default class HoverProvider implements BaseHoverProvider {
   public provideHover(
@@ -25,11 +25,15 @@ export default class HoverProvider implements BaseHoverProvider {
     }
 
     const componentName = doc.getText(range);
-    const componentPath = nameToPath(componentName);
     const workspacePath = workspace.getWorkspaceFolder(doc.uri)?.uri.fsPath;
-
+    let componentPath = nameToPath(componentName);
+    
     if (!existsSync(workspacePath + componentPath)) {
-      return;
+      componentPath = nameToIndexPath(componentName);
+      
+      if (!existsSync(workspacePath + componentPath)) {
+        return;
+      }
     }
 
     const lookUpUri = `[${componentPath}](${Uri.file(
