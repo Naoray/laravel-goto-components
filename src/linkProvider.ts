@@ -11,7 +11,7 @@ import {
   DocumentLink,
   Range,
 } from "vscode";
-import { nameToPath } from "./utils";
+import { nameToIndexPath, nameToPath } from "./utils";
 
 export default class LinkProvider implements DocumentLinkProvider {
   public provideDocumentLinks(
@@ -32,20 +32,26 @@ export default class LinkProvider implements DocumentLinkProvider {
 
       if (result !== null) {
         for (let componentName of result) {
-          const componentPath = nameToPath(componentName);
-
-          if (existsSync(workspacePath + componentPath)) {
-            let start = new Position(
-              line.lineNumber,
-              line.text.indexOf(componentName)
-            );
-            let end = start.translate(0, componentName.length);
-            let documentlink = new DocumentLink(
-              new Range(start, end),
-              Uri.file(workspacePath + componentPath)
-            );
-            documentLinks.push(documentlink);
+          let componentPath = nameToPath(componentName);
+          
+          if (!existsSync(workspacePath + componentPath)) {
+            componentPath = nameToIndexPath(componentName);
+            
+            if (!existsSync(workspacePath + componentPath)) {
+              continue;
+            }
           }
+          
+          let start = new Position(
+            line.lineNumber,
+            line.text.indexOf(componentName)
+          );
+          let end = start.translate(0, componentName.length);
+          let documentlink = new DocumentLink(
+            new Range(start, end),
+            Uri.file(workspacePath + componentPath)
+          );
+          documentLinks.push(documentlink);
         }
       }
 
